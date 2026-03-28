@@ -9,45 +9,92 @@ class ExBloc extends StatefulWidget {
   const ExBloc({super.key});
 
   @override
-  State<ExBloc> createState() =>
-      _ExBlocState();
+  State<ExBloc> createState() => _ExBlocState();
 }
 
-class _ExBlocState
-    extends State<ExBloc> {
+class _ExBlocState extends State<ExBloc> {
   int Counter = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-        mainAxisAlignment:
-            MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Row(
-            mainAxisAlignment:
-                MainAxisAlignment
-                    .center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              ButtonAdd(),
-              BlocBuilder<
-                CounterCubit,
-                CounterState
-              >(
-                builder:
-                    (context, state) {
-                      return TextCounter(
-                        counter: state
-                            .counter,
-                      );
-                    },
+              ButtonCounter(
+                onPressed: () {
+                  context.read<CounterCubit>().IncrementA();
+                },
+                icon: Icons.add,
               ),
-              ButtonRemove(),
+              BlocBuilder<CounterCubit, CounterState>(
+                builder: (context, state) {
+                  return TextCounter(counter: state.counterA);
+                },
+              ),
+              ButtonCounter(
+                onPressed: () {
+                  context.read<CounterCubit>().DecrementA();
+                },
+                icon: Icons.remove,
+              ),
             ],
           ),
           MaterialButton(
-            child: Text(
-              "Show Value Counter",
-            ),
+            child: Text("Show Value Counter A"),
+            onPressed: () {
+              print(Counter);
+            },
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ButtonCounter(
+                onPressed: () {
+                  context.read<CounterCubit>().IncrementB();
+                },
+                icon: Icons.add,
+              ),
+              BlocBuilder<CounterCubit, CounterState>(
+                builder: (context, state) {
+                  return TextCounter(counter: state.counterB);
+                },
+              ),
+              ButtonCounter(
+                onPressed: () {
+                  context.read<CounterCubit>().DecrementB();
+                },
+                icon: Icons.remove,
+              ),
+            ],
+          ),
+          MaterialButton(child: Text("Show Value Counter B"), onPressed: () {}),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ButtonCounter(
+                onPressed: () {
+                  context.read<CounterCubit>().IncrementC();
+                },
+                icon: Icons.add,
+              ),
+              BlocBuilder<CounterCubit, CounterState>(
+                builder: (context, state) {
+                  return TextCounter(counter: state.counterC);
+                },
+              ),
+              ButtonCounter(
+                onPressed: () {
+                  context.read<CounterCubit>().DecrementC();
+                },
+                icon: Icons.remove,
+              ),
+            ],
+          ),
+          MaterialButton(
+            child: Text("Show Value Counter C"),
             onPressed: () {
               print(Counter);
             },

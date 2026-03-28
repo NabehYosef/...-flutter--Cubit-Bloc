@@ -1,14 +1,15 @@
 class CounterState {
-  final int counter;
-  CounterState(this.counter);
+  final int counterA;
+  final int counterB;
+  final int counterC;
+
+  CounterState(this.counterA, this.counterB, this.counterC);
 }
 
-class IncrementCounter
-    extends CounterState {
-  IncrementCounter(super.counter);
+class IncrementCounter extends CounterState {
+  IncrementCounter(super.counterA, super.counterB, super.counterC);
 }
 
-class DecrementCounter
-    extends CounterState {
-  DecrementCounter(super.counter);
+class DecrementCounter extends CounterState {
+  DecrementCounter(super.counterA, super.counterB, super.counterC);
 }
