@@ -10,19 +10,24 @@ class CounterBloc
         > {
   CounterBloc()
     : super(CounterIntialState(0)) {
-    on<IncrementEvent>((event, emit) {
-      emit(
-        IncrementState(
-          state.counter + 1,
-        ),
-      );
-    });
-    on<DecrementEvent>((event, emit) {
-      emit(
-        DecrementState(
-          state.counter - 1,
-        ),
-      );
+    on<CounterEvent>((event, emit) {
+      if (event is IncrementEvent) {
+        if (state.counter == 2) {
+          throw Exception("Error ex");
+        }
+        emit(
+          IncrementState(
+            state.counter + 1,
+          ),
+        );
+      } else if (event
+          is DecrementEvent) {
+        emit(
+          DecrementState(
+            state.counter - 1,
+          ),
+        );
+      }
     });
   }
 }
